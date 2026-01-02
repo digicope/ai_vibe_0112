@@ -3,6 +3,7 @@
 https://innoitsa.or.kr/itsa/lms/atnlcReqst/reception.do?menuNo=700003&processCdArr=AI&lctreNo=243&lctreSttusCd=receiving
 
 <br>
+<br>
 
 
 ## git 주소 :    https://github.com/digicope/ai_vibe_0112
