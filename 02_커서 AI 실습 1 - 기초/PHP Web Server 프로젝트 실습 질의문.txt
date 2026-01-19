@@ -13,7 +13,7 @@ https://www.apachefriends.org/download.html 에서 XAMPP 다운로드(144MB)
 
 PHP 실행 방법 : php_app 폴더의 소스를 C:\xampp\htdocs\php_app에 복사
 
-(C:\xampp\htdocs\ 아래에 php_app 폴더를 미리 만들어 놓고 어래 명령 실행)
+(C:\xampp\htdocs\ 아래에 php_app 폴더를 미리 만들어 놓고 아래 명령 실행)
 Copy-Item -Path .\php_app\* -Destination 'C:\xampp\htdocs\php_app\' -Recurse -Force
 
 브라우저에서 http://localhost/php_app/index.php 접속
@@ -212,9 +212,10 @@ https://www.apachefriends.org/download.html 에서 XAMPP 다운로드(144MB)
 
 PHP 실행 방법 : php_app 폴더의 소스를 C:\xampp\htdocs\php_app에 복사
 
-(C:\xampp\htdocs\ 아래에 php_app 폴더를 미리 만들어 놓고 어래 명령 실행)
+(C:\xampp\htdocs\ 아래에 php_app 폴더를 미리 만들어 놓고 아래 명령 실행)
 Copy-Item -Path .\php_app\* -Destination 'C:\xampp\htdocs\php_app\' -Recurse -Force
 
 브라우저에서 http://localhost/php_app/index.php 접속
 -------------------------------------------------
+
 
