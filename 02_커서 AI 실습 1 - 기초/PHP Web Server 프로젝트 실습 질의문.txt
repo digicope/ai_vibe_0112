@@ -7,7 +7,7 @@
 실행 환경 : 로컬 PHP 내장 서버 또는 웹호스팅(Apache/PHP) 환경
 
 -------------------------------------------------
-PHP 용 툴 설치 :XMAMPP 설치 (가장 쉬움)
+PHP 용 툴 설치 : XMAMPP 설치 (가장 쉬움)
 https://www.apachefriends.org/download.html 에서 XAMPP 다운로드(144MB)
 설치 후 XAMPP Control Panel에서 Apache 시작
 
@@ -206,7 +206,7 @@ README.md 파일을 작성해줘.
 - 자주 발생하는 오류 2가지와 해결 방법을 작성해줘
 - php 개발 환경을 위해서 아래와 같은 설치 및 소스 실행 내용도 정리해줘
 -------------------------------------------------
-PHP 용 툴 설치 :XMAMPP 설치 (가장 쉬움)
+PHP 용 툴 설치 : XMAMPP 설치 (가장 쉬움)
 https://www.apachefriends.org/download.html 에서 XAMPP 다운로드(144MB)
 설치 후 XAMPP Control Panel에서 Apache 시작
 
@@ -217,3 +217,4 @@ Copy-Item -Path .\php_app\* -Destination 'C:\xampp\htdocs\php_app\' -Recurse -Fo
 
 브라우저에서 http://localhost/php_app/index.php 접속
 -------------------------------------------------
+
