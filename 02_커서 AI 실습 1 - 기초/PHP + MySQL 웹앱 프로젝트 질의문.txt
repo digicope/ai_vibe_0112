@@ -208,3 +208,45 @@ phpMyAdmin에서 테이블 생성, seed_data 실행, FTP 업로드 절차까지 
 |  교육용 확장          |  Column을 “직업”, “도시” 등으로 확장 후 UI 변경 실습 가능       |
 |  Cursor 활용          |  “이제 이 프로젝트 전체를 zip으로 묶어줘” → 자동 패키징 가능  |
 -------------------------------------------------------------------------------------------------
+
+=============================================================================================================
+
+[ XAMPP MySQL로 PHP DB 예제 실행 방법 ]
+
+
+(1) XAMPP 에서 sample_db 데이터베이스 생성 하기
+
+- XAMPP Control Panel을 실행시키고 Apache와 MySQL을 각각 [Start] 버튼을 눌러 서비스를 시작시킨다
+
+- MySQL 에서 [Admin] 버튼을 누르면 http://localhost/phpmyadmin/ 주소의 웹 브라우저 창이 뜨는데 
+상단 메뉴에서 데이터베이스를 클릭하고 데이터 베이스명에 "sample_db"라고 입력하고 
+옆의 옵션은 그대로두고 [만들기] 버튼을 클릭한다. 좌측 DB 목록에 sample_db가 보이는지 확인한다
+
+(2) 소스에서 DB  접속 정보 수정하기 
+- db_config.php 소스 파일을 열어서 아래와 같이 "user","pass","dbname"을 수정한다
+(user를 "root"로 하고 비번은 기본으로 설정되어 있지 않으므로 입력 값을 지우면된다)
+
+$host = "localhost";
+$user = "root";  
+$pass = "";    
+$dbname = "sample_db"; 
+
+(3) 소스 복사 및 실행
+
+- C:\xampp\htdocs\에 myapp 폴더를 만들고 커서에서 만든 소스를 아래 명령을 실행하여 모두 복사한다
+Copy-Item -Path .\myapp\* -Destination 'C:\xampp\htdocs\myapp\' -Recurse -Force
+
+- 브라우저에서 http://localhost/myapp/index.html 주소로 접속하여 화면을 확인해본다
+
+- 아직 테이블이 만들어지지 않았으므로 아래 주소를 입력하여 테이블을 생성해본다
+http://localhost/myapp/create_table.php
+
+- 아래 주소를 입력하여 샘플데이터를 생성하여 확인해본다
+http://localhost/myapp/seed_data.php
+
+- 메인 페이지로 접속하여 추가/수정/삭제 기능도 확인해본다
+http://localhost/myapp/
+
+- http://localhost/phpmyadmin/ 에서 접속해서 XAMPP이 제공하는 DB테이블 관리 기능을 사용할 수도 있다.
+
+
