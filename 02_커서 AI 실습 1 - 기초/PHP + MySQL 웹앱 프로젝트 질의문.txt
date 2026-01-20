@@ -255,7 +255,8 @@ http://localhost/phpmyadmin/ 에서 접속해서 상단의 메뉴에서 [SQL]을
 소스 편집 창에 아래 SQL 소스를 붙여 넣고 우측 하단의 [실행] 버튼을 클릭한다
 (쿼리문 예제 생성 프롬프트: 이 테이블에서 MYSQL db 쿼리 예제 만들어줘)
 
-- SELECT * FROM users;
+- - 전체 조회
+SELECT * FROM users;
 
 - 나이가 30 이상인 사용자를 검색하기
 SELECT * FROM users
@@ -294,6 +295,7 @@ WHERE name = '김민수';
 - 데이터 삭제 (DELETE)
 DELETE FROM users
 WHERE name = '김민수';
+
 
 
 
