@@ -209,7 +209,7 @@ phpMyAdmin에서 테이블 생성, seed_data 실행, FTP 업로드 절차까지 
 |  Cursor 활용          |  “이제 이 프로젝트 전체를 zip으로 묶어줘” → 자동 패키징 가능  |
 -------------------------------------------------------------------------------------------------
 
-=============================================================================================================
+==================================================================
 
 [ XAMPP MySQL로 PHP DB 예제 실행 방법 ]
 
@@ -247,6 +247,58 @@ http://localhost/myapp/seed_data.php
 - 메인 페이지로 접속하여 추가/수정/삭제 기능도 확인해본다
 http://localhost/myapp/
 
-- http://localhost/phpmyadmin/ 에서 접속해서 XAMPP이 제공하는 DB테이블 관리 기능을 사용할 수도 있다.
+- http://localhost/phpmyadmin/ 에서 접속해서 XAMPP이 제공하는 DB테이블 관리 기능을 사용할 수도 있고
+  SQL 쿼리 실습도 가능하다
+
+[SQL 쿼리 실습]
+http://localhost/phpmyadmin/ 에서 접속해서 상단의 메뉴에서 [SQL]을 클릭하고 
+소스 편집 창에 아래 SQL 소스를 붙여 넣고 우측 하단의 [실행] 버튼을 클릭한다
+(쿼리문 예제 생성 프롬프트: 이 테이블에서 MYSQL db 쿼리 예제 만들어줘)
+
+- SELECT * FROM users;
+
+- 나이가 30 이상인 사용자를 검색하기
+SELECT * FROM users
+WHERE age >= 30;
+
+- 나이를 기준으로 오름차순으로 정렬하기
+SELECT * FROM users
+ORDER BY age ASC;
+
+- 나이를 기준으로 내림차순으로 정렬하기
+SELECT * FROM users
+ORDER BY age DESC;
+
+- 전체 사용자 수 조회
+SELECT COUNT(*) AS total_users FROM users;
+
+- 나이 40 이상 사용자 수 조회
+SELECT COUNT(*) AS over_40 FROM users
+WHERE age >= 40;
+
+- 평균 나이 조회
+SELECT AVG(age) AS avg_age FROM users;
+
+- 최고 / 최저 나이 조회
+SELECT MAX(age) AS max_age, MIN(age) AS min_age FROM users;
+
+- 데이터 추가 (INSERT)
+INSERT INTO users (name, email, age)
+VALUES ('김민수', 'minsu123@example.com', 35);
+
+- 이메일 변경
+UPDATE users
+SET email = 'newemail@example.com'
+WHERE name = '김민수';
+
+- 데이터 삭제 (DELETE)
+DELETE FROM users
+WHERE name = '김민수';
+
+
+
+
+
+
 
 
