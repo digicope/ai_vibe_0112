@@ -1,4 +1,4 @@
-[StreamlitI Web Server 프로젝트 실습 질의]
+[Streamlit Web Server 프로젝트 실습 질의]
 
 프로젝트 폴더명 : Streamlit_Basic_Project
 
@@ -126,5 +126,6 @@ Streamlit 상태 관리 개념을 적용해줘.
 
 (소스 실행 방법)
 streamlit run streamlit_app/app.py
+
 
 
