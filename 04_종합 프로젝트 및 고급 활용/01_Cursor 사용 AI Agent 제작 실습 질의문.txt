@@ -1,7 +1,6 @@
 [Cursor 사용 AI Agent 제작 실습 질의문]
 
 프로젝트 폴더명 : AI_Agent_Basic_Project
-(Cursor Pro 1주 무료 버전 사용 가능)
 
 Cursor에서 프로젝트 폴더를 연 다음 Ctrl + Shift + P를 눌러 
 Python : Select Interpreter에서 anaconda3에서 사용했던 Python 3.12.7을 선택해준다
@@ -14,8 +13,8 @@ Python : Select Interpreter에서 anaconda3에서 사용했던 Python 3.12.7을 
 이미지 분석 +  RAG 검색 + 에이전트 도구 실행이 통합된 멀티모달 AI 에이전트 챗봇을 구현한다.
 
 [사용 기술]
-- Python 3.12
-- LangChain v1.0 (create_agent 기반)
+- Python 3.11 이상
+- LangChain v1.0 이상 (create_agent 기반)
 - langchain-openai
 - OpenAI gpt-4o-mini
 - 이미지 분석
@@ -78,6 +77,7 @@ ModuleNotFoundError: No module named 'langchain.text_splitter' 오류나. 수정
 
 [추가 질의-2]
 이미지 업로드시 오류나. 수정해줘
+
 
 
 
