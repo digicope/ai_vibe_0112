@@ -1,0 +1,199 @@
+[AI 제스처 비서 프로젝트 구현 실습 질의문]
+
+-프로젝트 폴더 : Gesture_Detector_Project
+- 프로젝트 개요
+웹캠을 통해 손가락 개수를 인식하고, 손가락 개수에 따라 OpenAI API를 호출하여
+AI 응답을 받는 Flask 웹 애플리케이션을 만듭니다.
+
+
+# 1단계: 프로젝트 초기 설정 및 requirements.txt 생성
+
+프롬프트:
+Python Flask 웹 애플리케이션 프로젝트를 시작합니다. 
+다음 라이브러리들이 포함된 requirements.txt 파일을 생성해주세요:
+- flask
+- opencv-contrib-python
+- openai
+- Pillow
+- numpy<2.0
+- python-dotenv
+- mediapipe==0.10.9
+
+버전은 최신 버전으로 설치하되, numpy는 2.0 미만, mediapipe는 0.10.9로 고정해주세요.
+
+
+# 2단계: gesture_detector.py 생성 (MediaPipe 손가락 인식)
+
+프롬프트:
+gesture_detector.py 파일을 생성해주세요. 
+이 파일은 MediaPipe를 사용하여 웹캠 프레임에서 손가락 개수를 세는 클래스를 포함합니다.
+
+요구사항:
+1. GestureDetector 클래스를 만들어주세요
+2. __init__ 메서드에서 mediapipe.solutions.hands.Hands를 초기화하세요
+   - static_image_mode=False
+   - max_num_hands=1
+   - min_detection_confidence=0.7
+3. count_fingers 메서드를 구현하세요:
+   - 입력: OpenCV BGR 프레임
+   - 출력: 펴진 손가락 개수 (0-4, 엄지 제외)
+   - 엄지를 제외한 4개 손가락(index, middle, ring, pinky)의 tip 번호는 [8, 12, 16, 20]
+   - 손가락이 펴졌는지 판단: tip의 y 좌표가 아래 joint(tip-2)의 y 좌표보다 작으면 편 상태
+   - 손이 감지되지 않으면 0 반환
+
+
+# 3단계: openai_client.py 생성 (OpenAI API 연동)
+
+프롬프트:
+openai_client.py 파일을 생성해주세요.
+이 파일은 OpenAI API를 사용하여 손가락 개수에 따른 프롬프트를 생성하고 AI 응답을 받는 기능을 포함합니다.
+
+요구사항:
+1. python-dotenv를 사용하여 .env 파일에서 OPENAI_API_KEY를 로드하세요
+2. OpenAI 클라이언트를 초기화하세요
+3. gesture_map 딕셔너리를 만들어주세요:
+   - 1: "오늘 뉴스를 알려줘"
+   - 2: "오늘 날씨 어때?"
+   - 3: "유명한 명언 하나 알려줘"
+   - 4: "간단한 운동 루틴 알려줘"
+   - 5: "나에게 인사해줘"
+4. get_ai_response 함수를 구현하세요:
+   - 입력: finger_count (손가락 개수)
+   - gesture_map에서 해당하는 프롬프트를 가져옵니다
+   - OpenAI API를 호출하여 응답을 받습니다 (model: "gpt-4o-mini")
+   - system 메시지: "당신은 친절한 AI 비서입니다."
+   - 응답 텍스트를 반환합니다
+   - 인식되지 않는 제스처인 경우 "인식되지 않는 제스처입니다." 반환
+
+
+# 4단계: templates/index.html 생성 (Flask 템플릿)
+
+프롬프트:
+templates 폴더를 만들고 index.html 파일을 생성해주세요.
+
+요구사항:
+1. 기본 HTML 구조를 만들어주세요
+2. 제목: "AI 제스처 비서"
+3. h2 태그로 "웹캠으로 손을 보여주세요" 텍스트 추가
+4. Flask의 url_for를 사용하여 video_feed 경로의 이미지를 표시하세요
+   - width="640" height="480"
+
+
+# 5단계: app.py 생성 - 기본 Flask 구조 및 웹캠 설정
+
+프롬프트:
+app.py 파일을 생성하고 기본 Flask 애플리케이션 구조를 만들어주세요.
+
+요구사항:
+1. Flask, cv2, numpy, PIL, os를 import하세요
+2. gesture_detector와 openai_client 모듈을 import하세요
+3. Flask 앱을 초기화하세요
+4. 웹캠을 찾는 find_camera 함수를 만들어주세요:
+   - 0, 1, 2번 카메라를 순서대로 시도
+   - cap.isOpened()와 cap.read()로 확인
+   - 사용 가능한 카메라를 찾으면 cap 객체와 인덱스를 반환
+   - 찾지 못하면 None, -1 반환
+5. find_camera를 호출하여 웹캠을 초기화하세요
+6. GestureDetector 인스턴스를 생성하세요
+7. latest_fingers와 latest_response 전역 변수를 초기화하세요 (0, "")
+
+
+
+# 6단계: app.py - 한글 텍스트 렌더링 함수 추가
+
+프롬프트:
+app.py에 한글 텍스트를 프레임에 표시하는 함수를 추가해주세요.
+
+요구사항:
+1. draw_korean_text 함수를 만들어주세요:
+   - 입력: frame (OpenCV BGR 이미지), text (한글 텍스트), position (x, y), font_size, font_path
+   - Windows 기본 폰트 경로: "C:/Windows/Fonts/malgun.ttf"
+   - PIL Image로 변환하여 RGBA 모드로 그리기
+   - 텍스트 크기를 측정하여 반투명 검은색 배경 추가 (padding=5, alpha=180)
+   - 텍스트에 검은색 테두리 추가 (outline_width=2)
+   - 흰색 텍스트를 그리기
+   - BGR로 다시 변환하여 반환
+
+
+# 7단계: app.py - 비디오 스트리밍 함수 추가
+
+프롬프트:
+app.py에 비디오 프레임을 생성하는 gen_frames 함수를 추가해주세요.
+
+요구사항:
+1. gen_frames 제너레이터 함수를 만들어주세요:
+   - 웹캠이 열려있지 않으면 에러 메시지 이미지를 계속 yield
+   - 웹캠에서 프레임을 읽어옵니다
+   - 프레임 읽기 실패 시 에러 메시지 표시
+   - 성공 시:
+     - detector.count_fingers로 손가락 개수 계산
+     - 손가락 개수가 변경되고 0보다 크면 OpenAI API 호출하여 응답 받기
+     - draw_korean_text로 "손가락 수: {개수}" 표시 (위치: 10, 30, 폰트 크기: 20)
+     - draw_korean_text로 AI 응답 표시 (위치: 10, 60, 폰트 크기: 16)
+   - 프레임을 JPEG로 인코딩하여 multipart/x-mixed-replace 형식으로 yield
+
+
+# 8단계: app.py - Flask 라우트 추가
+
+프롬프트:
+app.py에 Flask 라우트를 추가해주세요.
+
+요구사항:
+1. @app.route('/') 데코레이터로 index 함수를 만들어주세요:
+   - render_template('index.html') 반환
+2. @app.route('/video_feed') 데코레이터로 video_feed 함수를 만들어주세요:
+   - Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame') 반환
+3. if __name__ == '__main__' 블록에서 app.run(debug=False) 실행
+
+
+
+# 9단계: 문서 장성
+
+프롬프트:
+```
+아래 내용이 포함된 프로젝트 문서를 작성해주세요.
+
+요구사항:
+1. 프로젝트 소스 구조
+2. requirements.txt의 패키지들을 설치하는 명령어
+3. 앱을 실행하는 순서
+4. 문제 해결 가이드, 자주 발생하는 오류
+
+참고사항:
+- mediapipe==0.10.9 버전을 사용해야 solutions API가 정상 작동합니다
+- numpy는 2.0 미만 버전을 사용해야 mediapipe와 호환됩니다
+- 웹캠이 여러 개인 경우 자동으로 사용 가능한 것을 찾습니다
+
+------------------------------------------------------------------------------
+# 추가 개선 사항 (선택사항)
+
+프롬프트:
+프로젝트에 다음 기능들을 추가로 개선할 수 있습니다:
+
+1. CSS 스타일링 추가 (templates/index.html)
+2. 에러 처리 강화 (웹캠 연결 실패, API 호출 실패 등)
+3. 손가락 인식 정확도 개선 (엄지 포함 카운팅)
+4. 응답 텍스트 줄바꿈 처리 (긴 텍스트의 경우)
+5. 로깅 기능 추가
+6. 설정 파일 분리 (config.py)
+
+
+문제 해결 가이드
+
+**자주 발생하는 오류:**
+
+1. **AttributeError: module 'mediapipe' has no attribute 'solutions'**
+   - 해결: mediapipe==0.10.9 버전 사용 확인
+
+2. **웹캠이 인식되지 않음**
+   - 해결: find_camera 함수가 0, 1, 2번 카메라를 모두 시도하도록 구현 확인
+
+3. **한글 폰트가 표시되지 않음**
+   - 해결: Windows의 경우 "C:/Windows/Fonts/malgun.ttf" 경로 확인
+   - Linux의 경우 적절한 한글 폰트 경로로 변경
+
+4. **OpenAI API 오류**
+   - 해결: .env 파일에 올바른 API 키가 설정되어 있는지 확인
+
+---
+
