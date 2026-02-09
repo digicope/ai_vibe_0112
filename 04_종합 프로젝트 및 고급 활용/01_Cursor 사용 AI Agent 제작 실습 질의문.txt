@@ -72,11 +72,7 @@ C:\Users\storm\anaconda3\python.exe -m streamlit run app.py
 메시지 입력 예시 : 인공지능에 대해 검색해줘
 이미지 업로드 :  배포된 image.jpg 파일 사용
 
-[추가 질의-2]
-ModuleNotFoundError: No module named 'langchain.text_splitter' 오류나. 수정해줘
 
-[추가 질의-2]
-이미지 업로드시 오류나. 수정해줘
 
 
 
