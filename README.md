@@ -10,7 +10,7 @@ https://innoitsa.or.kr/itsa/lms/atnlcReqst/reception.do?menuNo=700003&processCdA
 <br>
 
 
-#### git 사용기간 : 2026.01.12~2026.02.12 (교육 기간 이후에는 접속 불가)
+#### git 사용기간 : 2026.01.12~2026.02.21 (교육 기간 이후에는 접속 불가)
 
 
 #### 강사: 고병화
